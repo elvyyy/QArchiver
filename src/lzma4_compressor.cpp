@@ -2,12 +2,13 @@
 
 const qint32 LZMA4_Compressor::LZ4_BLOCKSIZE;
 
-QByteArray LZMA4_Compressor::compress(const FileData& f) const
+QByteArray LZMA4_Compressor::compress(const FileData& fileData) const
 {
-    QFile file(f.getPath());
+    QFile file(fileData.getPath());
     file.open(QIODevice::ReadOnly);
-    if(!file.isOpen()){
-        QMessageBox::information(nullptr, "Error", "Can't open file: " + f.getPath());
+    if(!file.isOpen())
+    {
+        QMessageBox::information(nullptr, "Error", "Can't open file: " + fileData.getPath());
         return QByteArray();
     }
 
@@ -17,7 +18,7 @@ QByteArray LZMA4_Compressor::compress(const FileData& f) const
     qint32 nbytes = uncompressed.size();
 
     // internal compress function
-    auto compress = [&f](const char *src, int srclen, QByteArray &buffer) {
+    auto compress = [&fileData](const char *src, int srclen, QByteArray &buffer) {
         const int bufsize = LZ4_compressBound(srclen);
         buffer.reserve(bufsize);
 
@@ -25,8 +26,9 @@ QByteArray LZMA4_Compressor::compress(const FileData& f) const
             int rv = LZ4_compress_default(src, buffer.data(), srclen, bufsize);
             if (rv > 0) {
                 buffer.resize(rv);
-            }else{
-                QMessageBox::information(nullptr, "Error", "LZ4 compression error: " + f.getPath());
+            }else
+            {
+                QMessageBox::information(nullptr, "Error", "LZ4 compression error: " + fileData.getPath());
                 buffer.clear();
             }
         }else{

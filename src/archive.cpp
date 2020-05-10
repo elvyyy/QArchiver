@@ -78,7 +78,7 @@ bool Archive::save(){
         return saveExisting();
     }
 
-    resetModified();
+    //resetModified();
 }
 
 bool Archive::saveExisting(){

@@ -38,9 +38,9 @@ HEADERS += \
 	include/compressor.h \
 	include/fileData.h \
 	include/gui.h \
-	include/lz4_win32_v1_9_2/lz4.h \
-	include/lz4_win32_v1_9_2/lz4frame.h \
-	include/lz4_win32_v1_9_2/lz4hc.h \
+	include/lz4/lz4.h \
+	include/lz4/lz4frame.h \
+	include/lz4/lz4hc.h \
 	include/lzma4_compressor.h
 
 SOURCES += \
