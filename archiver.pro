@@ -49,3 +49,9 @@ SOURCES += \
 	src/gui.cpp \
 	src/lzma4_compressor.cpp \
 	src/main.cpp
+
+DISTFILES += \
+	images/background.jpg
+
+RESOURCES += \
+	resourse.qrc
